@@ -1,14 +1,22 @@
 package com.protal.portal.Responses;
 
 import com.protal.portal.Model.News;
-import com.protal.portal.Model.Season;
 
 import java.util.List;
 
 public class NewsResponse {
     private Integer statusCode;
     private String status;
-    private List<News> news;
+    private List<News> secondaryNews;
+    private List<News> mainNews;
+
+    public List<News> getMainNews() {
+        return mainNews;
+    }
+
+    public void setMainNews(List<News> mainNews) {
+        this.mainNews = mainNews;
+    }
 
     public Integer getStatusCode() {
         return statusCode;
@@ -26,11 +34,11 @@ public class NewsResponse {
         this.status = status;
     }
 
-    public List<News> getNews() {
-        return news;
+    public List<News> getSecondaryNews() {
+        return secondaryNews;
     }
 
-    public void setNews(List<News> news) {
-        this.news = news;
+    public void setSecondaryNews(List<News> secondaryNews) {
+        this.secondaryNews = secondaryNews;
     }
 }
