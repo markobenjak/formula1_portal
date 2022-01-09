@@ -131,7 +131,7 @@ public class MainPageController {
         Query query = new Query("source:twitter4j yusukey");
         QueryResult result = twitter.search(query);
         for (Status status : result.getTweets()) {
-            System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
+            //System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
         }
 
         return "";
