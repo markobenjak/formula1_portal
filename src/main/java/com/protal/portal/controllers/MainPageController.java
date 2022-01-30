@@ -1,9 +1,8 @@
 package com.protal.portal.controllers;
 
-import com.protal.portal.Model.Constructors;
 import com.protal.portal.Model.CurrentSeason;
 import com.protal.portal.Model.News;
-import com.protal.portal.Responses.ConstructorsResponse;
+import com.protal.portal.Responses.SocialMediaResponse;
 import com.protal.portal.Responses.CurrentSeasonsResponse;
 import com.protal.portal.Responses.NewsResponse;
 import org.jsoup.Jsoup;
@@ -40,6 +39,7 @@ public class MainPageController {
         this.restTemplate = restTemplateBuilder.build();
 
     }
+
     @GetMapping("/currentSeason")
     public CurrentSeasonsResponse currentSeason() throws JAXBException {
         CurrentSeasonsResponse currentSeasonResponse = new CurrentSeasonsResponse();
@@ -72,7 +72,6 @@ public class MainPageController {
 
         return currentSeasonResponse;
     }
-
 
     @GetMapping("/news")
     public NewsResponse getNews() throws IOException {
@@ -125,16 +124,23 @@ public class MainPageController {
     }
 
     @GetMapping("/socialMedia")
-    public String getSocialMedia() throws TwitterException {
-
+    public ResponseEntity<?> getSocialMedia() throws TwitterException {
+        List<String> urlList = new ArrayList<>();
         Twitter twitter = TwitterFactory.getSingleton();
-        Query query = new Query("source:twitter4j yusukey");
+        Query query = new Query("#formula1");
+        query.count(10);
         QueryResult result = twitter.search(query);
         for (Status status : result.getTweets()) {
+            String url= "https://twitframe.com/show?url=https://twitter.com/" + status.getUser().getScreenName()
+                    + "/status/" + status.getId();
+            System.out.println(url);
+            urlList.add(url);
             //System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
         }
 
-        return "";
+        return ResponseEntity.ok(new SocialMediaResponse(
+                urlList));
     }
+
 
 }

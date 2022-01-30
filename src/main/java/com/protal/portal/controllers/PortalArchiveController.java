@@ -11,6 +11,7 @@ import com.protal.portal.Responses.DriverResponse;
 import com.protal.portal.Responses.SeasonsResponse;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
