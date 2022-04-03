@@ -7,6 +7,8 @@ import java.util.List;
 public class ConstructorsResponse {
     private Integer statusCode;
     private String status;
+    private Integer totalConstructors;
+
     private List<Constructor> constructors;
 
     public Integer getStatusCode() {
@@ -31,5 +33,13 @@ public class ConstructorsResponse {
 
     public void setConstructors(List<Constructor> constructors) {
         this.constructors = constructors;
+    }
+
+    public Integer getTotalConstructors() {
+        return totalConstructors;
+    }
+
+    public void setTotalConstructors(Integer totalConstructors) {
+        this.totalConstructors = totalConstructors;
     }
 }

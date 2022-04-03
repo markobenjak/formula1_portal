@@ -8,6 +8,10 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Circuits {
 
+    @XmlAttribute
+    private Integer total;
+
+
     @XmlElementWrapper(name = "CircuitTable")
     @XmlElement(name = "Circuit")
     private List<Circuit> circuits = null;
@@ -18,5 +22,13 @@ public class Circuits {
 
     public void setCircuits(List<Circuit> circuits) {
         this.circuits = circuits;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }

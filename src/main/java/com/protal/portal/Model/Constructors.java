@@ -8,6 +8,9 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Constructors {
 
+    @XmlAttribute
+    private Integer total;
+
     @XmlElementWrapper(name = "ConstructorTable")
     @XmlElement(name = "Constructor")
     private List<Constructor> constructors = null;
@@ -18,5 +21,13 @@ public class Constructors {
 
     public void setConstructors(List<Constructor> constructors) {
         this.constructors = constructors;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }

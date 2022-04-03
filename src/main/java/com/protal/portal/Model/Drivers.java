@@ -7,6 +7,9 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Drivers {
 
+    @XmlAttribute
+    private Integer total;
+
     @XmlElementWrapper(name = "DriverTable")
     @XmlElement(name = "Driver")
     private List<Driver> drivers = null;
@@ -17,5 +20,13 @@ public class Drivers {
 
     public void setDrivers(List<Driver> drivers) {
         this.drivers = drivers;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }

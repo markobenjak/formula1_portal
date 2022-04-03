@@ -8,6 +8,7 @@ import java.util.List;
 public class DriverResponse {
     private Integer statusCode;
     private String status;
+    private Integer totalDrivers;
     private List<Driver> drivers;
 
     public Integer getStatusCode() {
@@ -32,5 +33,13 @@ public class DriverResponse {
 
     public void setDrivers(List<Driver> drivers) {
         this.drivers = drivers;
+    }
+
+    public Integer getTotalDrivers() {
+        return totalDrivers;
+    }
+
+    public void setTotalDrivers(Integer totalDrivers) {
+        this.totalDrivers = totalDrivers;
     }
 }

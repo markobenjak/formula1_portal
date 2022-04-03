@@ -9,6 +9,7 @@ import java.util.List;
 public class CircuitsResponse {
     private Integer statusCode;
     private String status;
+    private Integer totalCircuits;
     private List<Circuit> circuits;
 
     public Integer getStatusCode() {
@@ -33,5 +34,13 @@ public class CircuitsResponse {
 
     public void setCircuits(List<Circuit> circuits) {
         this.circuits = circuits;
+    }
+
+    public Integer getTotalCircuits() {
+        return totalCircuits;
+    }
+
+    public void setTotalCircuits(Integer totalCircuits) {
+        this.totalCircuits = totalCircuits;
     }
 }

@@ -34,9 +34,9 @@ public class PortalArchiveController {
     }
 
     @GetMapping("/drivers")
-    public DriverResponse getAllDrivers() throws JAXBException {
+    public DriverResponse getAllDrivers(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) throws JAXBException {
         DriverResponse driverResponse = new DriverResponse();
-        String url = "http://ergast.com/api/f1/drivers?limit=30&offset=20";
+        String url = "http://ergast.com/api/f1/drivers?limit=" + limit + "&offset=" + offset;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_XML);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
@@ -56,6 +56,7 @@ public class PortalArchiveController {
             Drivers generatedDrivers = (Drivers) unmarshaller.unmarshal(new StringReader(response.getBody().toString()));
             driverResponse.setStatusCode(response.getStatusCodeValue());
             driverResponse.setStatus("SUCCESS");
+            driverResponse.setTotalDrivers(generatedDrivers.getTotal());
             driverResponse.setDrivers(generatedDrivers.getDrivers());
         } else {
             driverResponse.setStatusCode(response.getStatusCodeValue());
@@ -67,9 +68,9 @@ public class PortalArchiveController {
     }
 
     @GetMapping("/constructors")
-    public ConstructorsResponse getAllConstructors() throws JAXBException {
+    public ConstructorsResponse getAllConstructors(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) throws JAXBException {
         ConstructorsResponse constructorsResponse = new ConstructorsResponse();
-        String url = "http://ergast.com/api/f1/constructors";
+        String url = "http://ergast.com/api/f1/constructors?limit=" + limit + "&offset=" + offset;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_XML);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
@@ -89,6 +90,7 @@ public class PortalArchiveController {
             Constructors generatedConstructors = (Constructors) unmarshaller.unmarshal(new StringReader(response.getBody().toString()));
             constructorsResponse.setStatusCode(response.getStatusCodeValue());
             constructorsResponse.setStatus("SUCCESS");
+            constructorsResponse.setTotalConstructors(generatedConstructors.getTotal());
             constructorsResponse.setConstructors(generatedConstructors.getConstructors());
         } else {
             constructorsResponse.setStatusCode(response.getStatusCodeValue());
@@ -100,9 +102,9 @@ public class PortalArchiveController {
     }
 
     @GetMapping("/circuits")
-    public CircuitsResponse getAllCircuits() throws JAXBException {
+    public CircuitsResponse getAllCircuits(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) throws JAXBException {
         CircuitsResponse circuitsResponse = new CircuitsResponse();
-        String url = "http://ergast.com/api/f1/circuits";
+        String url = "http://ergast.com/api/f1/circuits?limit=" + limit + "&offset=" + offset;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_XML);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
@@ -122,6 +124,8 @@ public class PortalArchiveController {
             Circuits generatedCircuits = (Circuits) unmarshaller.unmarshal(new StringReader(response.getBody().toString()));
             circuitsResponse.setStatusCode(response.getStatusCodeValue());
             circuitsResponse.setStatus("SUCCESS");
+            circuitsResponse.setTotalCircuits(generatedCircuits.getTotal());
+
             circuitsResponse.setCircuits(generatedCircuits.getCircuits());
         } else {
             circuitsResponse.setStatusCode(response.getStatusCodeValue());
