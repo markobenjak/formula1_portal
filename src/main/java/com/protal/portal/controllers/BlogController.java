@@ -42,7 +42,6 @@ public class BlogController {
     public ResponseEntity<?> insertTopic(@RequestBody Map<String, Object> payLoad) throws ParseException {
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 
-        System.out.println(payLoad.get("marker"));
         JSONArray data = new JSONArray(payLoad.get("marker").toString());
         ArrayList<String> list = new ArrayList<String>();
         RacePlan racePlan = new RacePlan();

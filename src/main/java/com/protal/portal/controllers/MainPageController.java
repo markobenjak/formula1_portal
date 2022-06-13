@@ -11,10 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import twitter4j.*;
 
@@ -27,6 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/portal")
@@ -89,13 +87,6 @@ public class MainPageController {
             news.setArticleUrl("https://www.formula1.com/" + secondary.attr("href"));
             news.setArticleImage(secondary.getElementsByTag("img").attr("data-src"));
             secondaryNewsList.add(news);
-
-           // System.out.println(secondary.getElementsByTag("img").attr("data-src"));
-            //System.out.println(secondary.getElementsByClass("f1--s").text());
-
-/*            String Test = secondary.attr("href");
-            System.out.println(Test); // outputs 1*/
-
         }
 
         Elements mainNews = doc.select("fieldset.f1-border--top-right > a");
@@ -105,37 +96,26 @@ public class MainPageController {
             news.setArticleUrl("https://www.formula1.com/" + main.attr("href"));
             news.setArticleImage(main.getElementsByTag("img").attr("data-src"));
             mainNewsList.add(news);
-
-            System.out.println(main.getElementsByTag("img").attr("data-src"));
-            System.out.println(main.getElementsByClass("f1--title").text());
-
-            String Test = main.attr("href");
-            System.out.println(Test); // outputs 1
-
         }
 
         newsResponse.setSecondaryNews(secondaryNewsList);
         newsResponse.setMainNews(mainNewsList);
         newsResponse.setStatusCode(200);
         newsResponse.setStatus("SUCCESS");
-        //System.out.println(text); // outputs 1
-        return newsResponse
-                ;
+        return newsResponse;
     }
 
     @GetMapping("/socialMedia")
-    public ResponseEntity<?> getSocialMedia() throws TwitterException {
+    public ResponseEntity<?> getSocialMedia(@RequestParam("hashtag") String hashtag) throws TwitterException {
         List<String> urlList = new ArrayList<>();
         Twitter twitter = TwitterFactory.getSingleton();
-        Query query = new Query("#formula1");
+        Query query = new Query("#" + hashtag);
         query.count(10);
         QueryResult result = twitter.search(query);
         for (Status status : result.getTweets()) {
             String url= "https://twitframe.com/show?url=https://twitter.com/" + status.getUser().getScreenName()
                     + "/status/" + status.getId();
-            System.out.println(url);
             urlList.add(url);
-            //System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
         }
 
         return ResponseEntity.ok(new SocialMediaResponse(

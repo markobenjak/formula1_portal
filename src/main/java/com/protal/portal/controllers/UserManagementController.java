@@ -10,9 +10,11 @@ import com.protal.portal.secuirtyImpl.payload.response.MessageResponse;
 import com.protal.portal.secuirtyImpl.repository.RoleRepository;
 import com.protal.portal.secuirtyImpl.repository.UserRepository;
 import com.protal.portal.secuirtyImpl.repository.UserRoleRepository;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -53,7 +55,7 @@ public class UserManagementController {
     }
 
     @GetMapping("/getRoles")
-    //@PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getRoles() {
         List<Role> roles = new ArrayList<>();
         roleRepository.findAll().forEach(roles::add);
@@ -81,8 +83,11 @@ public class UserManagementController {
 
     @Transactional
     @DeleteMapping("/deleteUser")
+    //    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUser(@RequestBody Map<String, Object> payLoad) {
         userRepository.deleteByUsername((String) payLoad.get("username"));
         return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
     }
+
+    // TODO: treba implementirati promjenu lozinke
 }
