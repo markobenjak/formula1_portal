@@ -74,7 +74,6 @@ public class ForumController {
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> approveOrDeleteTopic(@RequestBody Map<String, Object> payLoad) {
         if((boolean) payLoad.get("approveValue")){
-            System.out.println((Long) payLoad.get("topic"));
             forumTopicsRepository.setApprovedById(((Integer) payLoad.get("topicID")).longValue(), 1);
             return ResponseEntity.ok(new MessageResponse("Topic Approved!"));
         }else{

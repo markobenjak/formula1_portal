@@ -59,15 +59,15 @@ public class BlogControllerTests {
              .andExpect(jsonPath("$.message").value("Race Plan Created and pending for approval!"));
     }
 
-    @Test
-    void getDeleteRacePlanTest() throws Exception {
-        byte[] content = readBytesFromResource(deleteRacePlanJson);
-
-        mockMvc.perform(delete("/portal/deleteRacePlan")
-                        .content(content)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is2xxSuccessful());
-    }
+//    @Test
+//    void getDeleteRacePlanTest() throws Exception {
+//        byte[] content = readBytesFromResource(deleteRacePlanJson);
+//
+//        mockMvc.perform(delete("/portal/deleteRacePlan")
+//                        .content(content)
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().is2xxSuccessful());
+//    }
 
     @Test
     void getAllRacePlansTest() throws Exception {
@@ -96,15 +96,15 @@ public class BlogControllerTests {
                 .andExpect(jsonPath("$.blogPosts", notNullValue()));
     }
 
-    @Test
-    void getDeleteBlogPostTest() throws Exception {
-        byte[] content = readBytesFromResource(deleteBlogPostJson);
-
-        mockMvc.perform(delete("/portal/deleteBlogPost")
-                        .content(content)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is2xxSuccessful());
-    }
+//    @Test
+//    void getDeleteBlogPostTest() throws Exception {
+//        byte[] content = readBytesFromResource(deleteBlogPostJson);
+//
+//        mockMvc.perform(delete("/portal/deleteBlogPost")
+//                        .content(content)
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().is2xxSuccessful());
+//    }
 
     private byte[] readBytesFromResource(Resource resource) throws IOException {
         return Files.readAllBytes(Paths.get(resource.getURI()));
