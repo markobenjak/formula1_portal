@@ -45,6 +45,7 @@ public class ForumTopics {
     private Integer approved;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "forumTopics", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OrderBy("comment_creation_date DESC")
     private List<ForumComments> forumComments;
 
     public Integer getApproved() {
