@@ -63,7 +63,7 @@ public class BlogController {
         blogRacesRepository.save(racePlan);
 
 
-        return ResponseEntity.ok(new MessageResponse("Race Plan Created and pending for approval!"));
+        return ResponseEntity.ok(new MessageResponse("Race Plan Created!"));
     }
 
     @GetMapping("/getAllRacePlans")
@@ -94,7 +94,7 @@ public class BlogController {
         blogPostRepository.save(blogPost);
 
 
-        return ResponseEntity.ok(new MessageResponse("Blog Post Created and pending for approval!"));
+        return ResponseEntity.ok(new MessageResponse("Blog Post Created!"));
     }
 
     @GetMapping("/getAllBlogPosts")
